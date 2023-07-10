@@ -155,7 +155,7 @@ if opcao_selecionada == 'Notebook':
     st.write("Vamos iniciar exibindo um gráfico que apresenta a porcentagem de transações fraudulentas em nossa base de dados:")
     st.image("imagens/3.png")
     st.write("É evidente que há uma porcentagem mínima de fraudes, o que impacta diretamente na maneira como avaliaremos nosso modelo de machine learning e nada melhor do que um exemplo prático para demonstrar isso.")
-    st.write("O trecho de código abaixo é responsável por treinar e testar um modelo de inteligência artificial utilizando a acurácia como método de avaliação. O resultado foi de 99.92%, então isso quer dizer que acabamos de construir um modelo de previsão perfeito, certo? Errado!")
+    st.write("O trecho de código abaixo é responsável por treinar e testar um modelo de inteligência artificial utilizando a acurácia como método de avaliação.")
     codigo2 = """
     # definindo dados de treino e de teste
     y = tabela['Class']
@@ -177,10 +177,25 @@ if opcao_selecionada == 'Notebook':
     accuracy = accuracy_score(y_teste, y_pred)
     accuracy_percent = accuracy * 100
     accuracy_formatted = f"{accuracy_percent:.2f}%"
-    print(accuracy_formatted)
+
+    # Cria um cartão (figura) vazio
+    fig, ax = plt.subplots(figsize=(4, 3))
+
+    # Adiciona o texto do accuracy_formatted no cartão
+    ax.text(0.5, 0.5, accuracy_formatted, ha='center', va='center', fontsize=24)
+
+    # Remove os eixos e limites do gráfico
+    ax.axis('off')
+
+    # Exibe o resultado
+    plt.show()
     """
     st.code(codigo2, language='python')
-    st.write("A maioria das transações não são fraudolentas, então basta que o modelo considere que todos as novas transações que ele tenta prever também não são, assim ele terá uma alta taxa de acerto. Percebe como isso acaba afetando o nosso resultado ? Afinal, a cada fraude não prevista, isso representa um impacto financeiro negativo para a empresa.")
+    st.image("imagens/4.png")
+    st.write("O resultado obtido foi de 99,92% de acurácia. Isso significa que construímos um modelo de previsão perfeito, certo? Errado! A maioria das transações não são fraudulentas, o que implica que, se o modelo simplesmente considerar que todas as novas transações não são fraudes, ele terá uma alta taxa de acertos. Percebe como isso afeta nosso resultado? Afinal, cada fraude não prevista representa um impacto financeiro negativo para a empresa.")
+    st.write("E como podemos resolver esse problema? Existem duas soluções baseadas no mesmo princípio: tornar os dados proporcionais, ou seja, igualar o número de fraudes e não fraudes. No entanto, essa é uma tarefa complexa e delicada. Vou te ajudar a visualizar esses cenários a seguir:")
+    st.write("Se optarmos por excluir a maioria das transações não fraudulentas, corremos o risco de ter os dados restantes agrupados de uma maneira que afete nossa análise. Por exemplo: se excluirmos aleatoriamente a maioria dos dados e restarem apenas transações de alto valor. Você concorda que nem toda fraude está associada a uma compra de alto valor? Nesse caso, se o modelo tentar prever uma nova compra com valor mediano, a probabilidade de não considerá-la como fraude será alta, resultando em prejuízos desnecessários.")
+    st.write("Por outro lado, se apenas adicionarmos mais fraudes, corremos o risco de duplicar tanto um determinado dado que isso pode prejudicar a tomada de decisão do modelo. Por exemplo: suponha que exista uma compra de 50 EUR registrada em nossa base de dados atual e que tenha sido classificada como fraude. Ao adotar o método de aumentar a quantidade de fraudes para equilibrar a proporção, essa transação foi duplicada 200 mil vezes. A chance de o modelo de previsão considerar todas as novas transações de 50 EUR como fraudes será extremamente alta, o que está matematicamente correto, mas não reflete nossa realidade.")
     st.write("")
 
     st.header("6. Modelando uma inteligência artificial")
