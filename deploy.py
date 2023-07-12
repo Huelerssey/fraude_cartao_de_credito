@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_lottie import st_lottie
 from streamlit_option_menu import option_menu
+import matplotlib.pyplot as plt
 
 
 # configurações da pagina
@@ -203,6 +204,34 @@ if opcao_selecionada == 'Notebook':
     st.header("6. Modelando uma inteligência artificial")
     st.write("Chegamos à parte mais empolgante do projeto, onde construímos a inteligência artificial responsável por detectar fraudes em cartões de crédito. Embora seja uma etapa técnica e complexa, vou explicar de forma simplificada como tudo funciona e compartilhar os resultados obtidos. Novamente, convido você a acessar meu GitHub, por meio deste [link](https://github.com/Huelerssey/fraude_cartao_de_credito), caso queira entender detalhadamente como essas inteligências artificiais foram modeladas, linha por linha de código.")
     st.write("Ao lidar com a problemática das fraudes, temos um desafio de classificação em mãos. Para enfrentá-lo, utilizamos três principais inteligências artificiais: Decision Tree, Random Forest e Extra Trees. Em seguida, modelamos a base de dados para contornar os problemas já explicados durante a análise exploratória, garantindo que cada inteligência artificial utilize essa base de dados ajustada. Por fim, avaliamos o desempenho de cada abordagem e de cada uma das inteligências artificiais. Aqui estão os resultados:")
+    # Dados da matriz de confusão
+    matriz_confusao = [[75628, 9667],
+                    [16, 132]]
+
+    # Definir rótulos das categorias
+    categorias = ['Modelo não classificou como Fraude', 'Modelo classificou como Fraude']
+
+    # Cores das fatias para cada gráfico
+    cores_fatias1 = ['#00FF00', '#FF0000']
+    cores_fatias2 = ['#FF0000', '#00FF00']
+
+    # Gráfico dos dados que eram fraude
+    plt.figure(figsize=(6, 6))
+    plt.pie(matriz_confusao[1], labels=categorias, colors=cores_fatias2, autopct='%1.1f%%', startangle=90)
+    plt.title('Dados que eram Fraude')
+    plt.axis('equal')
+
+    # Exibir o gráfico no Streamlit
+    st.pyplot(plt)
+
+    # Gráfico dos dados que não eram fraude
+    plt.figure(figsize=(6, 6))
+    plt.pie(matriz_confusao[0], labels=categorias, colors=cores_fatias1, autopct='%1.1f%%', startangle=90)
+    plt.title('Dados que não eram fraude')
+    plt.axis('equal')
+
+    # Exibir o gráfico no Streamlit
+    st.pyplot(plt)
     st.write("")
 
     st.header("7. Resultados e considerações finais")
