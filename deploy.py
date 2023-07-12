@@ -203,35 +203,187 @@ if opcao_selecionada == 'Notebook':
 
     st.header("6. Modelando uma inteligência artificial")
     st.write("Chegamos à parte mais empolgante do projeto, onde construímos a inteligência artificial responsável por detectar fraudes em cartões de crédito. Embora seja uma etapa técnica e complexa, vou explicar de forma simplificada como tudo funciona e compartilhar os resultados obtidos. Novamente, convido você a acessar meu GitHub, por meio deste [link](https://github.com/Huelerssey/fraude_cartao_de_credito), caso queira entender detalhadamente como essas inteligências artificiais foram modeladas, linha por linha de código.")
-    st.write("Ao lidar com a problemática das fraudes, temos um desafio de classificação em mãos. Para enfrentá-lo, utilizamos três principais inteligências artificiais: Decision Tree, Random Forest e Extra Trees. Em seguida, modelamos a base de dados para contornar os problemas já explicados durante a análise exploratória, garantindo que cada inteligência artificial utilize essa base de dados ajustada. Por fim, avaliamos o desempenho de cada abordagem e de cada uma das inteligências artificiais. Aqui estão os resultados:")
-    # Dados da matriz de confusão
-    matriz_confusao = [[75628, 9667],
-                    [16, 132]]
+    st.write("Ao lidar com a problemática das fraudes, temos um desafio de classificação em mãos. Para enfrentá-lo, utilizamos três principais inteligências artificiais: Decision Tree, Random Forest e Extra Trees. Em seguida, modelamos a base de dados para contornar os problemas já explicados durante a análise exploratória, garantindo que cada inteligência artificial utilize essa base de dados ajustada. Por fim, avaliamos o desempenho de cada abordagem e de cada uma das inteligências artificiais. Use a seguinte legenda:")
+    st.write("Inteligência artificial - Método de reajustar base de dados")
+    
+    # Lista de modelos e métodos de resampling
+    lista_resultados = [
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Random Undersample',
+            'matriz_confusao': [[75628, 9667], [16, 132]],
+            'recall': 0.89
+        },
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Undersample ClusterCentroid',
+            'matriz_confusao': [[42256, 43039], [7, 141]],
+            'recall': 0.95
+        },
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Undersample NearMiss',
+            'matriz_confusao': [[33992, 51303], [7, 141]],
+            'recall': 0.95
+        },
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Random Oversample',
+            'matriz_confusao': [[84787, 508], [25, 123]],
+            'recall': 0.83
+        },
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Oversample SMOTE',
+            'matriz_confusao': [[85142, 153], [39, 109]],
+            'recall': 0.74
+        },
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Oversample ADASYN',
+            'matriz_confusao': [[85151, 144], [42, 106]],
+            'recall': 0.72
+        },
+        {
+            'modelo': 'Decision Tree',
+            'metodo_resampling': 'Combined Over/Undersample',
+            'matriz_confusao': [[85109, 186], [36, 112]],
+            'recall': 0.76
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Random Undersample',
+            'matriz_confusao': [[83647, 1648], [18, 130]],
+            'recall': 0.88
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Undersample ClusterCentroid',
+            'matriz_confusao': [[34241, 51054], [2, 146]],
+            'recall': 0.99
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Undersample NearMiss',
+            'matriz_confusao': [[69222, 16073], [8, 140]],
+            'recall': 0.95
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Random Oversample',
+            'matriz_confusao': [[85131, 164], [26, 122]],
+            'recall': 0.82
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Oversample SMOTE',
+            'matriz_confusao': [[85278, 17], [30, 118]],
+            'recall': 0.80
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Oversample ADASYN',
+            'matriz_confusao': [[85274, 21], [29, 119]],
+            'recall': 0.80
+        },
+        {
+            'modelo': 'Random Forest',
+            'metodo_resampling': 'Combined Over/Undersample',
+            'matriz_confusao': [[85268, 27], [27, 121]],
+            'recall': 0.82
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Random Undersample',
+            'matriz_confusao': [[84320, 975], [22, 126]],
+            'recall': 0.85
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Undersample ClusterCentroid',
+            'matriz_confusao': [[38421, 46874], [0, 148]],
+            'recall': 1.00
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Undersample NearMiss',
+            'matriz_confusao': [[78545, 6750], [10, 138]],
+            'recall': 0.93
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Random Oversample',
+            'matriz_confusao': [[85206, 89], [26, 122]],
+            'recall': 0.82
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Oversample SMOTE',
+            'matriz_confusao': [[85281, 14], [29, 119]],
+            'recall': 0.80
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Oversample ADASYN',
+            'matriz_confusao': [[85280, 15], [29, 119]],
+            'recall': 0.80
+        },
+        {
+            'modelo': 'Extra Trees',
+            'metodo_resampling': 'Combined Over/Undersample',
+            'matriz_confusao': [[85278, 17], [28, 120]],
+            'recall': 0.81
+        },
+    ]
 
-    # Definir rótulos das categorias
-    categorias = ['Modelo não classificou como Fraude', 'Modelo classificou como Fraude']
+    # Opções disponíveis no seletor
+    opcoes = [f"{resultado['modelo']} - {resultado['metodo_resampling']}" for resultado in lista_resultados]
 
-    # Cores das fatias para cada gráfico
-    cores_fatias1 = ['#00FF00', '#FF0000']
-    cores_fatias2 = ['#FF0000', '#00FF00']
+    # Seletor de opções
+    opcao_selecionada = st.selectbox("Selecione uma opção:", opcoes)
 
-    # Gráfico dos dados que eram fraude
-    plt.figure(figsize=(6, 6))
-    plt.pie(matriz_confusao[1], labels=categorias, colors=cores_fatias2, autopct='%1.1f%%', startangle=90)
-    plt.title('Dados que eram Fraude')
-    plt.axis('equal')
+    # Encontrar o resultado correspondente à opção selecionada
+    resultado_selecionado = None
+    for resultado in lista_resultados:
+        if f"{resultado['modelo']} - {resultado['metodo_resampling']}" == opcao_selecionada:
+            resultado_selecionado = resultado
+            break
 
-    # Exibir o gráfico no Streamlit
-    st.pyplot(plt)
+    # Verificar se um resultado válido foi selecionado
+    if resultado_selecionado is not None:
+        # Dados da matriz de confusão
+        matriz_confusao = resultado_selecionado['matriz_confusao']
 
-    # Gráfico dos dados que não eram fraude
-    plt.figure(figsize=(6, 6))
-    plt.pie(matriz_confusao[0], labels=categorias, colors=cores_fatias1, autopct='%1.1f%%', startangle=90)
-    plt.title('Dados que não eram fraude')
-    plt.axis('equal')
+        # Definir rótulos das categorias
+        categorias = ['Modelo não classificou como Fraude', 'Modelo classificou como Fraude']
 
-    # Exibir o gráfico no Streamlit
-    st.pyplot(plt)
+        # Cores das fatias para cada gráfico
+        cores_fatias1 = ['#00FF00', '#FF0000']
+        cores_fatias2 = ['#FF0000', '#00FF00']
+
+        # Legendas
+        legenda1 = ['Errou', 'Acertou']
+        legenda2 = ['Acertou', 'Errou']
+
+        # Gráfico dos dados que eram fraude
+        plt.figure(figsize=(6, 6))
+        plt.pie(matriz_confusao[1], labels=categorias, colors=cores_fatias2, autopct='%1.1f%%', startangle=90)
+        plt.title('Dados que eram Fraude')
+        plt.legend(legenda1, loc='best')
+        plt.axis('equal')
+
+        # Exibir o gráfico no Streamlit
+        st.pyplot(plt)
+
+        # Gráfico dos dados que não eram fraude
+        plt.figure(figsize=(6, 6))
+        plt.pie(matriz_confusao[0], labels=categorias, colors=cores_fatias1, autopct='%1.1f%%', startangle=90)
+        plt.title('Dados que não eram fraude')
+        plt.legend(legenda2, loc='lower right')
+        plt.axis('equal')
+
+        # Exibir o gráfico no Streamlit
+        st.pyplot(plt)
     st.write("")
 
     st.header("7. Resultados e considerações finais")
