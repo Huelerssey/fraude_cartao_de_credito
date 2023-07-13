@@ -354,37 +354,118 @@ if opcao_selecionada == 'Notebook':
         # Dados da matriz de confusão
         matriz_confusao = resultado_selecionado['matriz_confusao']
 
-        # Definir rótulos das categorias
-        categorias = ['Modelo não classificou como Fraude', 'Modelo classificou como Fraude']
-
         # Cores das fatias para cada gráfico
         cores_fatias1 = ['#00FF00', '#FF0000']
         cores_fatias2 = ['#FF0000', '#00FF00']
 
         # Legendas
-        legenda1 = ['Errou', 'Acertou']
-        legenda2 = ['Acertou', 'Errou']
+        legenda1 = ['Errou - Modelo não classificou como Fraude', 'Acertou - Modelo classificou como Fraude']
+        legenda2 = ['Acertou - Modelo não classificou como Fraude', 'Errou - Modelo classificou como Fraude']
 
+        st.subheader("Tentando prever Dados que eram Fraude")
         # Gráfico dos dados que eram fraude
         plt.figure(figsize=(6, 6))
-        plt.pie(matriz_confusao[1], labels=categorias, colors=cores_fatias2, autopct='%1.1f%%', startangle=90)
-        plt.title('Dados que eram Fraude')
-        plt.legend(legenda1, loc='best')
+        plt.pie(matriz_confusao[1], colors=cores_fatias2, autopct='%1.1f%%', startangle=90)
+        plt.legend(legenda1, loc='upper left', bbox_to_anchor=(0.80, 0.80), bbox_transform=plt.gcf().transFigure)
         plt.axis('equal')
 
         # Exibir o gráfico no Streamlit
         st.pyplot(plt)
 
+        st.subheader("Tentando prever Dados que não eram Fraude")
         # Gráfico dos dados que não eram fraude
         plt.figure(figsize=(6, 6))
-        plt.pie(matriz_confusao[0], labels=categorias, colors=cores_fatias1, autopct='%1.1f%%', startangle=90)
-        plt.title('Dados que não eram fraude')
-        plt.legend(legenda2, loc='lower right')
+        plt.pie(matriz_confusao[0], colors=cores_fatias1, autopct='%1.1f%%', startangle=90)
+        plt.legend(legenda2, loc='upper left', bbox_to_anchor=(0.80, 0.80), bbox_transform=plt.gcf().transFigure)
         plt.axis('equal')
 
         # Exibir o gráfico no Streamlit
         st.pyplot(plt)
     st.write("")
 
-    st.header("7. Resultados e considerações finais")
+    st.header("7. Resultados")
+    st.write("Chegamos ao momento de apresentar os resultados obtidos deste projeto de detecção de fraudes em cartões de crédito. Com base na aplicação das diferentes inteligências artificiais e na análise dos dados. Vamos começar respondendo a pergunta mais importante: 'Então afinal, os resultados obtidos nos gráficos a cima, são bons ou ruins ?' E a resposta é: Depende!")
+    st.write("Para facilitar o entendimento, vamos utilizar exemplos práticos para ilustrar os resultados obtidos. A seguir, apresentamos três modelos aleatórios selecionados entre todos os utilizados para a demonstração.")
     st.write("")
+
+    # modelo 1
+    st.subheader("Decision Tree - Random Undersample")
+
+    # Cria um DataFrame
+    data = {'': ['O dado Não era Fraude', 'O dado Era Fraude'],
+            'Modelo previu como: Não é Fraude': [75628, 16],
+            'Modelo previu como: É Fraude': [9667, 132]}
+
+    df = pd.DataFrame(data)
+
+    # Aplica a formatação condicional para colorir células específicas
+    def highlight_value(val):
+        if val == 75628 or val == 132:  # Valores para destacar em verde
+            return 'background-color: green'
+        elif val == 16 or val == 9667:  # Valores para destacar em vermelho
+            return 'background-color: red'
+        else:
+            return ''
+
+    # Exibe a tabela com a formatação condicional
+    st.table(df.style.applymap(highlight_value, subset=['Modelo previu como: Não é Fraude', 'Modelo previu como: É Fraude']))
+    st.write("Neste modelo, observamos uma alta eficácia na classificação de transações fraudulentas. Das 148 totais, o modelo identificou corretamente 132 delas, o que representa uma ótima taxa de acerto. No entanto, qual o preço disso?")
+    st.write("Ao analisar as transações que não eram fraudulentas, o modelo classificou 9667 delas como fraude. Esses falsos positivos resultam em clientes insatisfeitos com compras negadas, gerando um alto volume de contatos com o banco e exigindo um aumento no tamanho da equipe de atendimento ao cliente e toda a infraestrutura em volta disso. Se o custo de manter uma equipe maior ultrapassar muito a economia das fraudes previstas, a utilização desse modelo pode se tornar inviável para a empresa.")
+    st.write("")
+
+    # modelo 2
+    st.subheader("Random Forest - Oversample SMOTE")
+
+    # Cria um DataFrame
+    data = {'': ['O dado Não era Fraude', 'O dado Era Fraude'],
+            'Modelo previu como: Não é Fraude': [85278, 30],
+            'Modelo previu como: É Fraude': [17, 118]}
+
+    df = pd.DataFrame(data)
+
+    # Aplica a formatação condicional para colorir células específicas
+    def highlight_value(val):
+        if val == 85278 or val == 118:  # Valores para destacar em verde
+            return 'background-color: green'
+        elif val == 30 or val == 17:  # Valores para destacar em vermelho
+            return 'background-color: red'
+        else:
+            return ''
+
+    # Exibe a tabela com a formatação condicional
+    st.table(df.style.applymap(highlight_value, subset=['Modelo previu como: Não é Fraude', 'Modelo previu como: É Fraude']))
+    st.write("Neste outro modelo, temos  o exato oposto, com foco na redução dos falsos positivos. Isso significa que o modelo é mais cauteloso na classificação de transações como fraudes, evitando assim o problema do alto volume de contatos com o banco. No entanto, essa redução de falsos positivos vem com o custo de uma diminuição na precisão na detecção de fraudes.")
+    st.write("Observamos que, nesse modelo, o número de transações fraudulentas não previstas é quase o dobro do modelo anterior. Caso uma ou mais dessas 30 fraudes não detectadas sejam de alto valor, o impacto financeiro pode ser considerável. É importante ressaltar que mesmo com 16 fraudes não detectadas, o risco de prejuízo ainda existe, mas quanto maior o número de fraudes não identificadas, maior é a possibilidade de prejuízos.")
+    st.write("")
+
+    # modelo 3
+    st.subheader("Extra Trees - Undersample ClusterCentroid")
+
+    # Cria um DataFrame
+    data = {'': ['O dado Não era Fraude', 'O dado Era Fraude'],
+            'Modelo previu como: Não é Fraude': [38421, 0],
+            'Modelo previu como: É Fraude': [46874, 148]}
+
+    df = pd.DataFrame(data)
+
+    # Aplica a formatação condicional para colorir células específicas
+    def highlight_value(val):
+        if val == 38421 or val == 148 or val == 0:  # Valores para destacar em verde
+            return 'background-color: green'
+        elif val == 46874:  # Valores para destacar em vermelho
+            return 'background-color: red'
+        else:
+            return ''
+
+    # Exibe a tabela com a formatação condicional
+    st.table(df.style.applymap(highlight_value, subset=['Modelo previu como: Não é Fraude', 'Modelo previu como: É Fraude']))
+    st.write("E se você está se perguntando se é possível atingir um modelo 'perfeito', aqui está o resultado. Essa inteligência artificial é capaz de prever 100% das fraudes, porém, o custo disso é classificar erroneamente transações que não são fraudes como fraude, 46 mil vezes.")
+    st.write("")
+
+    st.header("8. Considerações finais")
+    st.write("Deu para perceber que é crucial encontrar um equilíbrio entre a quantidade de falsos positivos e falsos negativos nas previsões, certo? No entanto, é importante ressaltar que, decidir se o resultado do modelo é bom ou não, só depende da área de negócio ou empresa em questão, pois cada uma possui suas próprias necessidades e restrições.")
+    st.write("Vale lembrar também que não é necessário usar apenas um modelo. Seria uma estratégia interessante por exemplo, agrupar as transações ocorridas em transações de alto, médio e pequeno porte. E utilizar um modelo específico para cada grupo. Assim, para transações de grande porte utilizar modelos mais precisos e conservadores e se caso o modelo erre, exista um time responsável por entrar em contato com o titular para verificar se a compra é mesmo verídica. Enquanto nas compras de pequeno porte, usar modelos mais flexíveis na detecção e em caso de falso positivo, dar a liberdado para o próprio usuário resolver o problema da compra bloqueada pelo aplicativo do banco sem precisar entrar em contato.")
+    st.write("Além disso, é fundamental destacar a importância contínua da atualização e monitoramento dos modelos de detecção de fraudes, uma vez que os métodos utilizados pelos fraudadores estão em constante evolução.")
+    st.write("Por fim, este projeto proporcionou uma experiência prática e aprofundada na área de detecção de fraudes em cartões de crédito, consolidando os conhecimentos adquiridos em estatística, programação e inteligência artificial.")
+    st.write("")
+    st.image("imagens/6.png")
