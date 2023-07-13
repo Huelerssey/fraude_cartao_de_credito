@@ -81,7 +81,7 @@ if opcao_selecionada == 'Home':
 if opcao_selecionada == 'Notebook':
 
     # tabela usada para exibir algumas funções na tela
-    tabela = pd.read_csv('dataset/creditcard.csv')
+    tabela = pd.read_csv('creditcard.csv')
 
     st.title("Notebook do Projeto")
     st.write("")

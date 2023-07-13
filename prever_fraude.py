@@ -18,7 +18,7 @@ from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 # -> CARREGANDO DATASET
 
 # dataframe 
-tabela = pd.read_csv('dataset/creditcard.csv')
+tabela = pd.read_csv('creditcard.csv')
 
 # -> DATACLEANING
 
