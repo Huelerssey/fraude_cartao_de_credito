@@ -10,20 +10,20 @@ def carregar_dados():
     return tabela
 
 def storytelling():
-    st.title("Notebook do Projeto")
+    st.markdown("<h1 style='text-align: center;'>📌 Storytelling do Projeto 📌</h1>", unsafe_allow_html=True)
     st.write("")
 
-    st.header("1. Introdução")
+    st.header("📌 Introdução")
     st.write("Bem-vindo ao projeto de detecção de fraudes em cartões de crédito! Aqui, você vai me acompanhar em uma jornada completa, explorando todos os aspectos que envolvem desde a obtenção dos dados até o compartilhamento dos resultados. Ao longo deste storytelling, vamos executar as etapas de extração, limpeza e transformação dos dados (ELT), mergulhar em técnicas de modelagem estatística e machine learning, e por fim, apresentar os insights e descobertas que nos ajudarão a combater efetivamente as fraudes nesse cenário.")
     st.image("imagens/1.png")
     st.write("")
 
-    st.header("2. Obtenção dos dados")
+    st.header("📌 Obtenção dos dados")
     st.write("Na fase de obtenção dos dados, recorri à plataforma Kaggle, uma fonte confiável de conjuntos de dados reais para cientistas de dados. Para este projeto, utilizei dados fornecidos por uma instituição financeira europeia, disponíveis neste [link](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). Esses dados representam transações de cartões de crédito e são essenciais para o desenvolvimento da análise e detecção de fraudes.")
     st.image("imagens/2.png")
     st.write("")
 
-    st.header("3. Entendimento da área/negócio")
+    st.header("📌 Entendimento da área/negócio")
     st.write("Vamos começar entendendo a base de dados, aqui está uma tabela com as 5 primeiras linhas do nosso dataset.")
     st.dataframe(carregar_dados().head(5), hide_index=True)
     st.write("• Coluna 'Time' (tempo): contém os segundos decorridos entre cada transação e a primeira transação.")
@@ -33,7 +33,7 @@ def storytelling():
     st.write("Então, através desses dados (Tempo, Valor e Caracteristicas), vamos desenvolver um modelo que seja capaz de prever se uma transação é ou não fraudolenta.")
     st.write("")
 
-    st.header("4. Limpeza e tratamento dos dados")
+    st.header("📌 Limpeza e tratamento dos dados")
     st.write("Começando com a visualisação estatística da base de dados:")
     codigo1 = """
     print(tabela.info())
@@ -78,7 +78,7 @@ def storytelling():
     st.write("Ao analisar o código, é possível constatar que a base de dados inicial está uniforme, o que é algo relativamente raro e extremamente positivo. Essa uniformidade nos dados economiza um tempo valioso durante as etapas de pré-processamento e limpeza, permitindo um foco maior na análise e detecção de padrões e fraudes.")
     st.write("")
 
-    st.header("5. Análise exploratória de dados")
+    st.header("📌 Análise exploratória de dados")
     st.write("Nesta etapa, aplicarei meus conhecimentos em estatística e programação para preparar os dados e torná-los prontos para serem utilizados em um modelo de previsão. Como este é um projeto de portfólio, vou compartilhar a parte mais visual e explicativa do processo. Caso tenha interesse, você pode acessar o código-fonte completo da aplicação no meu GitHub, disponível neste [link](https://github.com/Huelerssey/fraude_cartao_de_credito).")
     st.write("Vamos iniciar exibindo um gráfico que apresenta a porcentagem de transações fraudulentas em nossa base de dados:")
     st.image("imagens/3.png")
@@ -128,7 +128,7 @@ def storytelling():
     st.image("imagens/5.png")
     st.write("")
 
-    st.header("6. Modelando uma inteligência artificial")
+    st.header("📌 Modelando uma inteligência artificial")
     st.write("Chegamos à parte mais empolgante do projeto, onde construímos a inteligência artificial responsável por detectar fraudes em cartões de crédito. Embora seja uma etapa técnica e complexa, vou explicar de forma simplificada como tudo funciona e compartilhar os resultados obtidos. Novamente, convido você a acessar meu GitHub, por meio deste [link](https://github.com/Huelerssey/fraude_cartao_de_credito), caso queira entender detalhadamente como essas inteligências artificiais foram modeladas, linha por linha de código.")
     st.write("Ao lidar com a problemática das fraudes, temos um desafio de classificação em mãos. Para enfrentá-lo, utilizamos três principais inteligências artificiais: Decision Tree, Random Forest e Extra Trees. Em seguida, modelamos a base de dados para contornar os problemas já explicados durante a análise exploratória, garantindo que cada inteligência artificial utilize essa base de dados ajustada. Por fim, avaliamos o desempenho de cada abordagem e de cada uma das inteligências artificiais. Use a seguinte legenda:")
     st.write("Inteligência artificial - Método de reajustar base de dados")
@@ -310,7 +310,7 @@ def storytelling():
         st.pyplot(plt)
     st.write("")
 
-    st.header("7. Resultados")
+    st.header("📌 Resultados")
     st.write("Chegamos ao momento de apresentar os resultados obtidos deste projeto de detecção de fraudes em cartões de crédito. Com base na aplicação das diferentes inteligências artificiais e na análise dos dados. Vamos começar respondendo a pergunta mais importante: 'Então afinal, os resultados obtidos nos gráficos a cima, são bons ou ruins ?' E a resposta é: Depende!")
     st.write("Para facilitar o entendimento, vamos utilizar exemplos práticos para ilustrar os resultados obtidos. A seguir, apresentamos três modelos aleatórios selecionados entre todos os utilizados para a demonstração.")
     st.write("")
@@ -389,7 +389,7 @@ def storytelling():
     st.write("E se você está se perguntando se é possível atingir um modelo 'perfeito', aqui está o resultado. Essa inteligência artificial é capaz de prever 100% das fraudes, porém, o custo disso é classificar erroneamente transações que não são fraudes como fraude, 46 mil vezes.")
     st.write("")
 
-    st.header("8. Considerações finais")
+    st.header("📌 Considerações finais")
     st.write("Deu para perceber que é crucial encontrar um equilíbrio entre a quantidade de falsos positivos e falsos negativos nas previsões, certo? No entanto, é importante ressaltar que, decidir se o resultado do modelo é bom ou não, só depende da área de negócio ou empresa em questão, pois cada uma possui suas próprias necessidades e restrições.")
     st.write("Vale lembrar também que não é necessário usar apenas um modelo. Seria uma estratégia interessante por exemplo, agrupar as transações ocorridas em transações de alto, médio e pequeno porte. E utilizar um modelo específico para cada grupo. Assim, para transações de grande porte utilizar modelos mais precisos e conservadores e se caso o modelo erre, exista um time responsável por entrar em contato com o titular para verificar se a compra é mesmo verídica. Enquanto nas compras de pequeno porte, usar modelos mais flexíveis na detecção e em caso de falso positivo, dar a liberdado para o próprio usuário resolver o problema da compra bloqueada pelo aplicativo do banco sem precisar entrar em contato.")
     st.write("Além disso, é fundamental destacar a importância contínua da atualização e monitoramento dos modelos de detecção de fraudes, uma vez que os métodos utilizados pelos fraudadores estão em constante evolução.")
