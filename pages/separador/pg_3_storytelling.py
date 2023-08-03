@@ -396,3 +396,9 @@ def storytelling():
     st.write("Por fim, este projeto proporcionou uma experiência prática e aprofundada na área de detecção de fraudes em cartões de crédito, consolidando os conhecimentos adquiridos em estatística, programação e inteligência artificial.")
     st.write("")
     st.image("imagens/6.png")
+
+    #footer
+    with st.container():
+        col1, col2, col3 = st.columns(3)
+        
+        col2.write("Developed By: [@Huelerssey](https://github.com/Huelerssey)")
