@@ -1,5 +1,5 @@
 import streamlit as st
-from src.data_utility import carregar_dados
+from src.data_utility import carregar_dataframe
 
 
 def previsao():
@@ -16,7 +16,7 @@ def previsao():
             color = 'green'
         return ['background-color: %s' % color]*len(val)
 
-    df = carregar_dados().head(5)
+    df = carregar_dataframe().head(5)
     st.markdown(df.style.apply(color_columns, axis=0).to_html(index=False), unsafe_allow_html=True)
     st.write("\n")
 
