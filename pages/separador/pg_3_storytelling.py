@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from src.data_utility import carregar_dataframe
+from src.data_utility import carregar_dataset
 
 
 def storytelling():
@@ -20,7 +20,7 @@ def storytelling():
 
     st.header("📌 Entendimento da área/negócio")
     st.write("Vamos começar entendendo a base de dados, aqui está uma tabela com as 5 primeiras linhas do nosso dataset.")
-    st.dataframe(carregar_dataframe().head(5), hide_index=True)
+    st.dataframe(carregar_dataset().head(5), hide_index=True)
     st.write("• Coluna 'Time' (tempo): contém os segundos decorridos entre cada transação e a primeira transação.")
     st.write("• Coluna 'Amount' (valor): contém o valor da transação.")
     st.write("• Colunas 'V1, V2...V28' (caracteristicas): são as caracteristicas da transação que passaram por um processo de PCA, ou seja, os dados foram transformados de maneira que não seja possível indetificar o dono real da transação, para garantir a confidencialidade.")
