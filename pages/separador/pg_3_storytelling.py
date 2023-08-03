@@ -1,13 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from src.data_utility import carregar_dados
 
-
-# função que otimiza o carregamento dos dados
-@st.cache_data
-def carregar_dados():
-    tabela = pd.read_pickle('arquivos_pkl/dataframe_fraude.pkl')
-    return tabela
 
 def storytelling():
     st.markdown("<h1 style='text-align: center;'>📌 Storytelling do Projeto 📌</h1>", unsafe_allow_html=True)

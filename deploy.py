@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import json
 from streamlit_lottie import st_lottie
 from streamlit_option_menu import option_menu
@@ -13,12 +12,6 @@ st.set_page_config(
     page_title='Detecção de Fraude',
     page_icon='💳'
 )
-
-# função que otimiza o carregamento dos dados
-@st.cache_data
-def carregar_dados():
-    tabela = pd.read_csv("dataset/creditcard.csv")
-    return tabela
 
 # estilos de css
 with open("style.css") as f:
