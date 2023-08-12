@@ -5,7 +5,7 @@ from src.data_utility import carregar_dataset
 def previsao():
     st.markdown("<h1 style='text-align: center;'>📊 Modelo de Previsão de Fraude em Cartões de Crédito 📊</h1>", unsafe_allow_html=True)
     st.write("\n")
-    st.write("Bem-vindo à página de previsão de fraudes em cartões de crédito. Infelizmente, não é possível aplicar diretamente o modelo de machine learning desenvolvido para este conjunto de dados em um ambiente de produção. Permita-me explicar o motivo.")
+    st.write("Bem-vindo à página de previsão de fraudes em cartões de crédito. Infelizmente, não é possível aplicar diretamente o modelo de machine learning desenvolvido para este conjunto de dados neste ambiente de produção. Permita-me explicar o motivo.")
 
     st.write("\n")
     st.write("O conjunto de dados que utilizamos passou por um processo de transformação chamado Análise de Componentes Principais (PCA). Esta técnica foi usada para preservar a privacidade e garantir o anonimato dos clientes. Abaixo está uma amostra dos dados após a transformação:")

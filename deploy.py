@@ -6,12 +6,14 @@ from streamlit_extras.colored_header import colored_header
 import pages.separador.pg_1_home as PaginaUm
 import pages.separador.pg_2_previsao as PaginaDois
 import pages.separador.pg_3_storytelling as PaginaTres
+import pages.separador.pg_4_apresentacao as PaginaQuatro
 
 
 # configurações da pagina
 st.set_page_config(
     page_title='Detecção de Fraude',
-    page_icon='💳'
+    page_icon='💳',
+    layout='centered'
 )
 
 # estilos de css
@@ -19,63 +21,16 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # animações
-with open("animacoes/animacao_lottie.json") as source:
-    animacao_1 = json.load(source)
+with open("animacoes/animacao_final_perfil.json") as source:
+    animacao = json.load(source)
 
 # Menu de navegação lateral
 with st.sidebar:
 
     #exibir animação
-    st_lottie(animacao_1, height=100, width=270)
+    st_lottie(animacao, height=200, width=300)
 
-    # marcador azul
-    colored_header(
-    label="",
-    description="",
-    color_name="light-blue-70"
-    )
-    
-    opcao_selecionada = option_menu(
-        menu_title="Menu Inicial",
-        menu_icon="justify",
-        options=['Home', 'Previsão', 'Storytelling'],
-        icons=['house-door', 'clipboard-data', 'journal-code'],
-        default_index=0,
-        orientation='vertical',
-    )
-
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-
-    # footer da barra lateral
-    colored_header(
-    label="",
-    description="",
-    color_name="light-blue-70"
-    )
-
-    st.markdown("<h5 style='text-align: center; color: lightgray;'>Developed By: Huelerssey Rodrigues</h5>", unsafe_allow_html=True)
+    # badges
     st.markdown("""
     <div style="display: flex; justify-content: space-between;">
         <div>
@@ -96,14 +51,34 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
+    # header azul
+    colored_header(
+    label="",
+    description="",
+    color_name="light-blue-70"
+    )
+    
+    opcao_selecionada = option_menu(
+        menu_title="Menu Inicial",
+        menu_icon="justify",
+        options=['Home', 'Construção do Modelo de Machine Learning', 'Modelo de Machine Learning', 'Apresentação DadosFera'],
+        icons=['house-door', 'pin-angle', 'clipboard-data', 'journal-code'],
+        default_index=0,
+        orientation='vertical',
+    )
+
 # Retorna a pagina 1
 if opcao_selecionada == "Home":
     PaginaUm.home()
 
 # Retorna a pagina 2
-elif opcao_selecionada == "Previsão":
+elif opcao_selecionada == "Modelo de Machine Learning":
     PaginaDois.previsao()
 
 # Retorna a pagina 3
-elif opcao_selecionada == "Storytelling":
+elif opcao_selecionada == "Construção do Modelo de Machine Learning":
     PaginaTres.storytelling()
+
+# retorna a pagina 4
+elif opcao_selecionada == "Apresentação DadosFera":
+    PaginaQuatro.apresentacao()

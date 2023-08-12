@@ -5,7 +5,7 @@ from src.data_utility import carregar_dataset
 
 
 def storytelling():
-    st.markdown("<h1 style='text-align: center;'>📌 Storytelling do Projeto 📌</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>📌 Construção do Projeto 📌</h1>", unsafe_allow_html=True)
     st.write("")
 
     st.header("📌 Introdução")
@@ -388,7 +388,6 @@ def storytelling():
     st.write("Deu para perceber que é crucial encontrar um equilíbrio entre a quantidade de falsos positivos e falsos negativos nas previsões, certo? No entanto, é importante ressaltar que, decidir se o resultado do modelo é bom ou não, só depende da área de negócio ou empresa em questão, pois cada uma possui suas próprias necessidades e restrições.")
     st.write("Vale lembrar também que não é necessário usar apenas um modelo. Seria uma estratégia interessante por exemplo, agrupar as transações ocorridas em transações de alto, médio e pequeno porte. E utilizar um modelo específico para cada grupo. Assim, para transações de grande porte utilizar modelos mais precisos e conservadores e se caso o modelo erre, exista um time responsável por entrar em contato com o titular para verificar se a compra é mesmo verídica. Enquanto nas compras de pequeno porte, usar modelos mais flexíveis na detecção e em caso de falso positivo, dar a liberdado para o próprio usuário resolver o problema da compra bloqueada pelo aplicativo do banco sem precisar entrar em contato.")
     st.write("Além disso, é fundamental destacar a importância contínua da atualização e monitoramento dos modelos de detecção de fraudes, uma vez que os métodos utilizados pelos fraudadores estão em constante evolução.")
-    st.write("Por fim, este projeto proporcionou uma experiência prática e aprofundada na área de detecção de fraudes em cartões de crédito, consolidando os conhecimentos adquiridos em estatística, programação e inteligência artificial.")
     st.write("")
     st.image("imagens/6.png")
 
