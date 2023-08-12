@@ -74,7 +74,7 @@ def storytelling():
     st.write("")
 
     st.header("📌 Análise exploratória de dados")
-    st.write("Nesta etapa, aplicarei meus conhecimentos em estatística e programação para preparar os dados e torná-los prontos para serem utilizados em um modelo de previsão. Como este é um projeto de portfólio, vou compartilhar a parte mais visual e explicativa do processo. Caso tenha interesse, você pode acessar o código-fonte completo da aplicação no meu GitHub, disponível neste [link](https://github.com/Huelerssey/fraude_cartao_de_credito).")
+    st.write("Nesta etapa, aplicarei meus conhecimentos em estatística e programação para preparar os dados e torná-los prontos para serem utilizados em um modelo de previsão.")
     st.write("Vamos iniciar exibindo um gráfico que apresenta a porcentagem de transações fraudulentas em nossa base de dados:")
     st.image("imagens/3.png")
     st.write("É evidente que há uma porcentagem mínima de fraudes, o que impacta diretamente na maneira como avaliaremos nosso modelo de machine learning e nada melhor do que um exemplo prático para demonstrar isso.")
@@ -124,9 +124,96 @@ def storytelling():
     st.write("")
 
     st.header("📌 Modelando uma inteligência artificial")
-    st.write("Chegamos à parte mais empolgante do projeto, onde construímos a inteligência artificial responsável por detectar fraudes em cartões de crédito. Embora seja uma etapa técnica e complexa, vou explicar de forma simplificada como tudo funciona e compartilhar os resultados obtidos. Novamente, convido você a acessar meu GitHub, por meio deste [link](https://github.com/Huelerssey/fraude_cartao_de_credito), caso queira entender detalhadamente como essas inteligências artificiais foram modeladas, linha por linha de código.")
-    st.write("Ao lidar com a problemática das fraudes, temos um desafio de classificação em mãos. Para enfrentá-lo, utilizamos três principais inteligências artificiais: Decision Tree, Random Forest e Extra Trees. Em seguida, modelamos a base de dados para contornar os problemas já explicados durante a análise exploratória, garantindo que cada inteligência artificial utilize essa base de dados ajustada. Por fim, avaliamos o desempenho de cada abordagem e de cada uma das inteligências artificiais. Use a seguinte legenda:")
-    st.write("Inteligência artificial - Método de reajustar base de dados")
+    st.write("Chegamos à parte mais empolgante do projeto, onde construímos a inteligência artificial responsável por detectar fraudes em cartões de crédito. Vou demonstrar detalhadamente como essas inteligências artificiais foram modeladas, linha por linha de código.")
+    st.write("Ao lidar com a problemática das fraudes, temos um desafio de classificação em mãos. Para enfrentá-lo, utilizamos três principais inteligências artificiais: Decision Tree, Random Forest e Extra Trees. Em seguida, modelamos a base de dados para contornar os problemas já explicados durante a análise exploratória, garantindo que cada inteligência artificial utilize essa base de dados ajustada.")
+    st.write("Aqui está o código responsável por modelar, treinar e testar todos os algoritmos de machine learning que desenvolvi:")
+    codigo3 = """
+    # definindo dados de treino e de teste
+    y = tabela['Class']
+    x = tabela.drop('Class', axis=1)
+
+    # dividindo a base entre treino e teste
+    x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, test_size=0.30, random_state=42, stratify=y)
+
+    # função para avaliar modelos
+    def avaliar_modelos(modelos, x_treino, y_treino, x_teste, y_teste, resampling_methods):
+        resultados = {}
+        
+        for nome, modelo in modelos.items():
+            for resampling_method in resampling_methods:
+                if resampling_method == 'Random Undersample':
+                    rus = RandomUnderSampler(random_state=42)
+                    x_res, y_res = rus.fit_resample(x_treino, y_treino)
+                elif resampling_method == 'Undersample ClusterCentroid':
+                    cc = ClusterCentroids(estimator=MiniBatchKMeans(n_init=1, random_state=0), random_state=42)
+                    x_res, y_res = cc.fit_resample(x_treino, y_treino)
+                elif resampling_method == 'Undersample NearMiss':
+                    nm = NearMiss()
+                    x_res, y_res = nm.fit_resample(x_treino, y_treino)
+                elif resampling_method == 'Random Oversample':
+                    ros = RandomOverSampler(random_state=42, shrinkage=0.7)
+                    x_res, y_res = ros.fit_resample(x_treino, y_treino)
+                elif resampling_method == 'Oversample SMOTE':
+                    sm = SMOTE(random_state=42)
+                    x_res, y_res = sm.fit_resample(x_treino, y_treino)
+                elif resampling_method == 'Oversample ADASYN':
+                    ada = ADASYN(random_state=42)
+                    x_res, y_res = ada.fit_resample(x_treino, y_treino)
+                elif resampling_method == 'Combined Over/Undersample':
+                    sme = SMOTEENN(random_state=42)
+                    x_res, y_res = sme.fit_resample(x_treino, y_treino)
+                else:
+                    raise ValueError(f'Método de resampling desconhecido: {resampling_method}')
+                
+                modelo.fit(x_res, y_res)
+                y_pred = modelo.predict(x_teste)
+                cm = confusion_matrix(y_teste, y_pred)
+                rs = recall_score(y_teste, y_pred)
+                
+                if nome not in resultados:
+                    resultados[nome] = {}
+                
+                resultados[nome][resampling_method] = {
+                    'Matriz de confusão': cm,
+                    'Recall': rs
+                }
+        
+        return resultados
+
+    # Criar o modelo de árvore de decisão
+    clf = tree.DecisionTreeClassifier(random_state=42)
+
+    # Criar o modelo de Random Forest
+    clfrf = RandomForestClassifier(random_state=42)
+
+    # Criar o modelo de Extra Trees
+    clfet = ExtraTreesClassifier(random_state=42)
+
+    # Criar o dicionário com os nomes dos modelos e as instâncias correspondentes
+    modelos = {
+        'Decision Tree': clf,
+        'Random Forest': clfrf,
+        'Extra Trees': clfet
+    }
+
+    # Definir os métodos de resampling a serem utilizados
+    resampling_methods = ['Random Undersample', 'Undersample ClusterCentroid', 'Undersample NearMiss',
+                        'Random Oversample', 'Oversample SMOTE', 'Oversample ADASYN',
+                        'Combined Over/Undersample']
+
+    # Chamar a função para avaliar os modelos
+    resultados = avaliar_modelos(modelos, x_treino, y_treino, x_teste, y_teste, resampling_methods)
+
+    # Imprimir os resultados
+    for nome, resultado in resultados.items():
+        print(f"Modelo: {nome}")
+        for resampling_method, res in resultado.items():
+            print(f"Método de resampling: {resampling_method}")
+            print(f"Matriz de confusão: {res['Matriz de confusão']}")
+            print(f"Recall: {res['Recall']:.2f}%")
+    """
+    st.code(codigo3, language='python')
+    st.warning("**⚙️ - Selecione: Inteligência artificial - Método de reajustar base de dados**")
     
     # Lista de modelos e métodos de resampling
     lista_resultados = [
@@ -395,4 +482,4 @@ def storytelling():
     with st.container():
         col1, col2, col3 = st.columns(3)
         
-        col2.write("Developed By: [@Huelerssey](https://github.com/Huelerssey)")
+        col2.write("Developed By: [@Huelerssey](https://huelerssey-portfolio.website)")
