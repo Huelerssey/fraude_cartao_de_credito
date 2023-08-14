@@ -13,6 +13,14 @@ def apresentacao():
     color_name="light-blue-70"
     )
     
+    # cria 3 colunas
+    col1, col2, col3 = st.columns(3)
+
+    # Criar um botão
+    if col2.button('💻Vídeo da Apresentação💻'):
+        # video incorporado do youtube
+        st.markdown('<iframe width="700" height="500" src="https://www.youtube.com/embed/enphZoeAkjw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>', unsafe_allow_html=True)
+
     st.subheader("📝 - Introdução")
     st.write("Através desta apresentação, espero demonstrar minhas habilidades relevantes para a área como estatística, machine learning, visualização de dados e, claro, a comunicação eficaz dos resultados. Acredito que a combinação de tecnologia e pensamento crítico pode levar a soluções inovadoras, e estou aqui para provar que também posso ser #Fera 🚀")
     st.write("")
