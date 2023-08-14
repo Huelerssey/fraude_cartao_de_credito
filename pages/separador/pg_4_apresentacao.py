@@ -19,12 +19,12 @@ def apresentacao():
 
     st.subheader("📖 - Conhecendo a Problemática")
     st.write("As fraudes em cartões de crédito são um problema crescente que afeta bancos, comerciantes e consumidores. A detecção rápida e precisa de transações fraudulentas é crucial para minimizar perdas financeiras e manter a confiança do cliente. Esta solução propõe um sistema integrado que utiliza tecnologias modernas de processamento de dados e aprendizado de máquina para detectar fraudes em tempo real. Vou ilustrar o processo a baixo através de um fluxograma:")
-    st.write("gráfico")
+    st.image("imagens/infografico.png")
     st.write("Agora que já conhecemos o processo, podemos explicar separadamente cada etapa desta pepline.")
     st.write("")
 
-    st.subheader("1️⃣ - Coleta de Dados de Transações em Tempo Real (Generator e Kinesis Stream)")
-    st.write("Os dados de transações são coletados em tempo real através do Generator, que captura detalhes essenciais de cada transação. Esses dados são então transmitidos pelo Kinesis Stream, um serviço de streaming em tempo real que permite o processamento contínuo de grandes volumes de dados.")
+    st.subheader("1️⃣ - Coleta de Dados de Transações em Tempo Real (Lambda e Kinesis Stream)")
+    st.write("Os dados de transações são coletados em tempo real através do Lambda, que captura detalhes essenciais de cada transação. Esses dados são então transmitidos pelo Kinesis Stream, um serviço de streaming em tempo real que permite o processamento contínuo de grandes volumes de dados.")
     st.write("")
 
     st.subheader("2️⃣ - Pré-processamento e Limpeza de Dados (Firehose)")
@@ -43,8 +43,26 @@ def apresentacao():
     st.write("Com base nos resultados gerados pela avaliação em tempo real, são produzidos relatórios de análise profunda que se tornam ferramentas indispensáveis na tomada de decisões estratégicas. Esses relatórios fornecem insights valiosos que podem ser transformados em ações direcionadas.")
     st.write("")
 
+    st.write("---")
     st.subheader("☕ - Entregando Soluções (o que você esperava ler)")
-    st.write("")
+    st.write("**✅ - Problema Principal: Modelagem em Tempo Real e Personalização**")
+    st.write("Esta abordagem inovadora para a detecção de fraudes em cartões de crédito não se limita a uma única solução. Reconhecemos a diversidade e complexidade do comportamento do consumidor e, portanto, implementamos uma estratégia multi-modelo. Utilizando técnicas de clusterização, segmentamos os clientes de acordo com o nível de consumo e adaptamos os modelos de classificação para cada grupo.")
+    st.write("➡️ **Clientes de Baixo Consumo:** Para transações menores, um modelo flexível é implementado, permitindo bloqueios e liberações rápidas através do aplicativo.")
+    st.write("➡️ **Clientes de Alto Consumo:** Compras de valores mais elevados exigem uma abordagem mais conservadora. Neste caso, um modelo rigoroso é utilizado para prevenir perdas substanciais por fraudes.")
+
+    st.write("---")
+    st.write("**✅ - Grandes Oportunidades: Insights para Marketing e Incentivo à Segurança**")
+    st.write("A nossa solução vai além da detecção de fraudes, transformando dados e insights em oportunidades de negócios. Através da análise de clusters e do comportamento de segurança dos clientes, geramos informações valiosas para a equipe de marketing. Esses insights são a base para campanhas direcionadas que incentivam boas práticas de segurança.")
+    st.write("➡️ **Recompensas e Incentivos:** Oferecemos recompensas como descontos ou cashback em parceria com empresas, incentivando os clientes a manter suas contas seguras.")
+    st.write("➡️ **Engajamento e Educação:** Campanhas educativas fortalecem a consciência sobre segurança, criando uma cultura de responsabilidade e confiança.")
+
+    st.write("---")
+    st.write("**✅ - Quem Será o Usuário/Beneficiado Desta Aplicação**")
+    st.write("A nossa solução é projetada para servir várias partes interessadas, tanto dentro quanto fora da empresa:")
+    st.write("➡️ **Product Manager:** Utiliza a solução para orientar o desenvolvimento do produto, garantindo que ele atenda às necessidades do mercado.")
+    st.write("➡️ **Equipe de Marketing:** Aproveita os insights gerados para criar campanhas eficazes e direcionadas.")
+    st.write("➡️ **Setor de Contact Center:** Fornece suporte essencial para resolver problemas relacionados a fraudes e outros desafios.")
+    st.write("➡️ **Clientes:** No centro de tudo, os clientes beneficiam-se de uma experiência segura e personalizada, reforçada por incentivos e recompensas.")
 
     # header azul
     colored_header(
