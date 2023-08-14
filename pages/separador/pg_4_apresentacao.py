@@ -44,7 +44,7 @@ def apresentacao():
     st.write("")
 
     st.write("---")
-    st.subheader("☕ - Entregando Soluções (o que você esperava ler)")
+    st.subheader("🌟 - Entregando Soluções (o que você esperava ler)")
     st.write("**✅ - Problema Principal: Modelagem em Tempo Real e Personalização**")
     st.write("Esta abordagem inovadora para a detecção de fraudes em cartões de crédito não se limita a uma única solução. Reconhecemos a diversidade e complexidade do comportamento do consumidor e, portanto, implementamos uma estratégia multi-modelo. Utilizando técnicas de clusterização, segmentamos os clientes de acordo com o nível de consumo e adaptamos os modelos de classificação para cada grupo.")
     st.write("➡️ **Clientes de Baixo Consumo:** Para transações menores, um modelo flexível é implementado, permitindo bloqueios e liberações rápidas através do aplicativo.")
@@ -64,6 +64,10 @@ def apresentacao():
     st.write("➡️ **Setor de Contact Center:** Fornece suporte essencial para resolver problemas relacionados a fraudes e outros desafios.")
     st.write("➡️ **Clientes:** No centro de tudo, os clientes beneficiam-se de uma experiência segura e personalizada, reforçada por incentivos e recompensas.")
 
+    st.write("---")
+    st.subheader("📜 - Conclusão")
+    st.write("Ao apresentar esta solução, espero ter demonstrado minha proficiência nas habilidades exigidas, incluindo estatística, machine learning, visualização de dados e comunicação eficaz de resultados. Estou confiante de que esta proposta representa não apenas uma resposta robusta ao case técnico, mas também uma visão inovadora de como a ciência de dados pode ser aplicada para criar valor real e sustentável.")
+
     # header azul
     colored_header(
     label="",
@@ -77,3 +81,4 @@ def apresentacao():
     with col2:    
         #footer
         st.write("Developed By: [@Huelerssey](https://huelerssey-portfolio.website)")
+        st.markdown("<h6 style='text-align: center;'>#QueroSerFera</h6>", unsafe_allow_html=True)
